@@ -1,0 +1,67 @@
+\documentclass[a4paper]{jsarticle}
+
+%======================================================================
+%		論文のタイトル，著者，日付
+%======================================================================
+
+\title{\Huge タイトル\\\huge サブタイトル\vspace{120mm}}
+\author{\Large 濱崎 直紀\vspace{30mm}}
+\date{平成8年4月26日}
+
+%======================================================================
+%		マクロの読み込みとコマンドの定義
+%======================================================================
+
+\usepackage{graphicx}       % eps file を張り付けるのに必要
+%\usepackage[dvipdfmx]{graphicx}     % png等の画像を貼りつけるのに必要
+\usepackage{bm}     % 太字を書くのに必要
+\usepackage{here}       % その場所に画像を入れるのに必要
+\usepackage{comment}        % コメントを挟むのに必要
+\usepackage{listings}      % ソースコードを表示するのに必要
+\usepackage{jlisting}       % ソースコード内に日本語のコメントアウトがある場合必要（TEX Live の場合，別途ダウンロードが必要）
+
+%======================================================================
+%		本文
+%======================================================================
+
+\begin{document}
+
+\begin{titlepage}
+\maketitle
+\thispagestyle{empty}
+\end{titlepage}
+
+\input{section/section_1}
+\input{section/section_2}
+
+%======================================================================
+%		付録
+%======================================================================
+
+\clearpage
+\appendix
+\pagestyle{empty}
+% ソースコードの表示に関する設定
+\lstset{
+    basicstyle={\ttfamily},
+    identifierstyle={\small},
+    commentstyle={\smallitshape},
+    keywordstyle={\small\bfseries},
+    ndkeywordstyle={\small},
+    stringstyle={\small\ttfamily},
+    frame={tb},
+    breaklines=true,
+    columns=[l]{fullflexible},
+    numbers=left,
+    xrightmargin=0zw,
+    xleftmargin=3zw,
+    numberstyle={\scriptsize},
+    stepnumber=1,
+    numbersep=1zw,
+    lineskip=-0.5ex
+}
+\input{appendix/appendix_1}
+\clearpage
+\input{appendix/appendix_2}
+
+\end{document}

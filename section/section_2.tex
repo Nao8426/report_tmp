@@ -1,0 +1,62 @@
+% サンプル
+\section{結果と課題}
+
+\subsection{結果}
+特徴量抽出を行なった2画像，および作成したパノラマ画像の一例を以下に示す．\par
+\begin{figure}[H]
+    \begin{minipage}{0.5\hsize}
+        \begin{center}
+            \includegraphics[width=75mm]{./figures/section_2/sample.eps}
+        \end{center}
+    \end{minipage}
+    \begin{minipage}{0.5\hsize}
+        \begin{center}
+            \includegraphics[width=75mm]{./figures/section_2/sample.eps}
+        \end{center}
+    \end{minipage}
+\end{figure}
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=100mm]{./figures/section_2/sample.eps}
+    \end{center}
+\end{figure}
+また，レベル1のデータセット10セットにおけるパノラマ画像作成の成否，および処理時間は以下のようになった．
+\begin{table}[H]
+    \begin{center}
+        \begin{tabular}{ccccc}
+            \hline
+            Target & Result(default) & Result(FAST) & Time(default) & Time(FAST)\\
+            \hline \hline
+            1-001 & $\circ$ & $\circ$ & 35.56 & 12.77\\
+            1-002 & $\times$ & $\circ$ & 292.36 & 53.93\\
+            1-003 & $\times$ & $\circ$ & 3.61 & 3.52\\
+            1-004 & $\circ$ & $\circ$ & 215.18 & 47.27\\
+            1-005 & $\times$ & $\circ$ & 58.56 & 26.96\\
+            1-006 & $\times$ & $\circ$ & 20.92 & 16.25\\
+            1-007 & $\times$ & $\circ$ & 295.62 & 55.06\\
+            1-008 & $\times$ & $\times$ & 3.78 & 3.47\\
+            1-009 & $\circ$ & $\circ$ & 183.84 & 46.63\\
+            1-010 & $\times$ & $\times$ & 60.60 & 24.80\\
+            \hline
+        \end{tabular}
+    \end{center}
+\end{table}
+処理に使用したPCは"MacBook Pro(Core i5，メモリ8GB)"である．
+
+
+\subsection{課題}
+\begin{itemize}
+    \setlength{\itemsep}{5mm}
+    \item 正答率の向上に関しての課題\par
+    \vspace{1mm}
+    \quad
+    前節で示したように，Level1では8, 10のデータセットで正しくパノラマを作成できなかった．
+    これは，重なるべき場所に置いて特徴点が抽出されていなかったためである．
+    これは，$t$および$n$の調節によって改善できると考えられる．
+    \item 回転，およびスケールへの対応の課題\par
+    \vspace{1mm}
+    \quad
+    本課題で作ったプログラムは，回転およびスケールには正しく対応できない．
+    これは特徴点抽出のフェーズに置いて，隣接する2点を抽出してしまうために，マッチングの際にもっとも信頼のおける特徴点2対が隣接するピクセルになり，回転，拡大が正しく計算できない可能性があるためである．(そもそも変換行列を計算する関数は現状本プログラムには組み込まれていない．)
+    これを解決するためには，特徴点抽出のフェーズで隣接する特徴点が存在した場合，特徴量の小さい方の特徴点を「間引く」非最大値抑制と言われる処理を行う必要がある．
+\end{itemize}
